@@ -95,13 +95,17 @@ Citizen.CreateThread(function()
 		Citizen.Wait(0)
 		local playerPed = PlayerPedId()
 		local coords = GetEntityCoords(playerPed)
-		local betweencoords = GetDistanceBetweenCoords(coords, -276.08, 805.28, 119.38, true)
+		local betweencoords = GetDistanceBetweenCoords(coords, -272.3, 804.2, 119.36, true)
+		if betweencoords < 7.0 then
+			DrawMarker(-1795314153, -272.3, 804.2, 118.36, 0, 0, 0, 0, 0, 0, 1.3, 1.3, .5, 0, 93, 0, 155, 0, 0, 2, 0, 0, 0, 0)
+		end
+
 		if betweencoords < 2.0 and not already then
 			DrawTxt(Config.HuntingMessage, 0.50, 0.90, 0.7, 0.7, true, 255, 255, 255, 255, true)
 			if IsControlJustPressed(2, 0xCEFD9220) and not pressing then
 				pressing = true
-				GiveWeaponToPed_2(playerPed, 0x772C8DD6, 10, true, true, 1, false, 0.5, 1.0, 1.0, true, 0, 0)
-				SetPedAmmo(playerPed, 0x772C8DD6, 10)
+				--GiveWeaponToPed_2(playerPed, 0x772C8DD6, 10, true, true, 1, false, 0.5, 1.0, 1.0, true, 0, 0)
+				--SetPedAmmo(playerPed, 0x772C8DD6, 10)
 				missionstart()
 				already = true
 				startscenario()
@@ -111,4 +115,6 @@ Citizen.CreateThread(function()
 end)
 
 
-
+function DrawMarker(hash, x, y, z, dx, dy, dz, rx, ry, rz, sx, sy, sz, r,g ,b, a, bob, face, p19, rotate, tDict, tName, drawOnEnt)
+	Citizen.InvokeNative(0x2A32FAA57B937173, hash, x, y, z, dx, dy, dz, rx, ry, rz, sx, sy, sz, r, g, b, a, bob, face, p19, rotate, tDict, tName, drawOnEnt)
+end
